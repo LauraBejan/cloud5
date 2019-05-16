@@ -4,6 +4,9 @@ from flask import Flask,render_template, flash, request
 from sendMail import sendMail
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 import json
+from sendMail import sendMail
+
+from flask import Flask
 app = Flask(__name__)
 class ReusableForm(Form):
     name = TextField('Name:', validators=[validators.required()])
@@ -32,3 +35,4 @@ def result():
             return str(getRandomAnswer(search))
     #   return str(result)
     #   return render_template("result.html",result = result)
+    return str(getRandomAnswer('kim kardashian'))
