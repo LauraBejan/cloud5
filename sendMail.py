@@ -8,7 +8,7 @@ def sendMail(mail):
 
 	message = Mail(from_email = 'lepowobo@directmail.top',
 			to_emails=mail,
-			subject='You have a added a new song to the playlist,
+			subject='You have a added a new song to the playlist',
 			plain_text_content='easy to use',
 			html_content='''This is the song you added. 
 							Title:
