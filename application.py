@@ -1,5 +1,7 @@
 from dbconn import *
 from yt_api import *
+from sendMail import sendMail
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -11,4 +13,6 @@ def hello():
     #     message_to_display += str(word)
     # return message_to_display
     # return("gets here?")
+    receiver="lepowobo@directmail.top"
+    sendMail(receiver)
     return str(getRandomAnswer('kim kardashian'))
