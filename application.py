@@ -5,7 +5,6 @@ from sendMail import sendMail
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 import json
 from sendMail import sendMail
-from translator import translateText
 
 
 from flask import Flask
@@ -52,7 +51,3 @@ def preview():
             message = request.form["message"]
             sendMail(receiver,title,message)
     return "Mail sent"
-
-@app.route("/translate")
-def translate():
-    return translateText("salut","english")
