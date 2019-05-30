@@ -11,3 +11,5 @@ google-api-python-client == 1.7.8
 WTForms == 2.2.1
 simplejson == 3.16.0
 SendGrid == 6.0.5
+requests == 2.22.0
+

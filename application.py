@@ -50,11 +50,17 @@ def result():
 def mail():
     return render_template("mail.html")
 
+import random
 @app.route("/options")
 def displayOptions():
-    result, comm, answer = getTitles("kim")
-    setAnswer("opt" + str(answer))
-    return render_template("options.html",comm=comm,opt1=result[0],opt2=result[1],opt3=result[2])
+    rand_seed = random.randint(1,1000) / 1000
+    if rand_seed > 0.3:
+        key = getRandKey()
+        result, comm, answer = getTitles(key)
+        setAnswer("opt" + str(answer))
+        return render_template("options.html",comm=comm,opt1=result[0],opt2=result[1],opt3=result[2])
+    else:
+        return render_template("suggestion.html")
 
 
 @app.route("/process+result", methods=['POST'])
@@ -80,8 +86,15 @@ def preview():
 def suggestKeyWords():
     return render_template("suggestion.html")
 
+import requests
 @app.route("/ThankYou",methods=['POST'])
 def processSuggestion():
     if request.method == 'POST':
             suggestion = request.form["suggestion"]
-            return suggestion
+            checkProfanity = requests.get("https://www.purgomalum.com/service/json?text={}".format(suggestion))
+            response = checkProfanity.json()["result"]
+            if "*" not in response:
+                insertKey(response)
+                return "Thank you for your suggestion!"
+            else:
+                return "Hey, that's not very nice!" 
