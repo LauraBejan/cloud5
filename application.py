@@ -51,14 +51,17 @@ def mail():
     return render_template("mail.html")
 
 import random
+from thumbnail import *
 @app.route("/options")
 def displayOptions():
     rand_seed = random.randint(1,1000) / 1000
     if rand_seed > 0.3:
         key = getRandKey()
-        result, comm, answer = getTitles(key)
+        # result, comm, answer = getTitles(key)
+        result, comm, answer = ["Kanye west", "Prank video", "Why Im quitting youtube"], "Very nice", 1
+        hint = getThumbnail(result[answer])
         setAnswer("opt" + str(answer))
-        return render_template("options.html",comm=comm,opt1=result[0],opt2=result[1],opt3=result[2])
+        return render_template("options.html",comm=comm,opt1=result[0],opt2=result[1],opt3=result[2],hint=hint)
     else:
         return render_template("suggestion.html")
 
