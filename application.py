@@ -19,16 +19,18 @@ class ReusableForm(Form):
     name = TextField('Name:', validators=[validators.required()])
 @app.route("/")
 def hello():
-    return "hello"
-    result,comm,answer = getTitles("kim")
-    out = ""
-    for title in result:
-        out += title
-    out += "<br>"
-    out += comm + "<br>" + str(answer)
-    return out
-    # return render_template("hello.html")
-    # return str(getRandomAnswer('kim kardashian'))
+    # return "hello"
+    # result,comm,answer = getTitles("kim")
+    # out = ""
+    # for title in result:
+    #     out += title
+    # out += "<br>"
+    # out += comm + "<br>" + str(answer)
+    # return out
+    # # return render_template("hello.html")
+    # # return str(getRandomAnswer('kim kardashian'))
+    # return "hello"
+    return getRandKey()
 
 @app.route("/result",methods=['POST','GET'])
 def result():

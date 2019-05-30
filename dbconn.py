@@ -17,6 +17,14 @@ def exists(key):
         return True
     return False
 
+def getRandKey():
+    number_of_rows = cursor.execute("SELECT COUNT(*) FROM SearchKeys;").fetchone()
+    number_of_rows = int(list(number_of_rows)[0])
+    import random
+    rand_row = random.randint(1,number_of_rows)
+    rand_key = cursor.execute("Select VAL From (Select Row_Number() Over (Order By USES) As RowNum , * From SearchKeys) t2 Where RowNum = {}".format(rand_row)).fetchone()
+    return list(rand_key)[0]
+
 def delete(key):
     key = "'" + key + "'"
     cursor.execute("DELETE FROM SearchKeys WHERE VAL = {}".format(key))
