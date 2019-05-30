@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html>
-   <body>
-      <form action = "http://ccproiect2.azurewebsites.net/preview" method = "POST">
-         <p>To: <input type = "text" name = "receiver" /></p>
-         <p>Title: <input type = "text" name = "title" /></p>
-         <p>Message: <input type = "text" name = "message" /></p>
 
-         <p><input type = "submit" value = "submit" /></p>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #7C98B3;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #ACCBE1;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #CEE5F2;
+  padding: 20px;
+  width:50%;
+}
+</style>
+   <body>
+       <center>
+        <br><br><br><br>
+       <div>
+      <form action = "http://ccproiect2.azurewebsites.net/preview" method = "POST">
+         <p align="left">To: <input type = "text" name = "receiver" /></p>
+         <p align="left">Title: <input type = "text" name = "title" /></p>
+         <p align="left">Message: <input type = "text" name = "message" /></p>
+
+         <p><input type = "submit" value = "Send" /></p>
       </form>
+      </div>
+      <center>
    </body>
 </html>
+

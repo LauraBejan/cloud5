@@ -1,17 +1,46 @@
 <!doctype>
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+}
+.button5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  border-radius: 4px;
+}
+
+.button5:hover {
+  background-color: #555555;
+  color: white;
+}
+
+</style>
 <html>
    <body>
-    <h2>
-        Options  {{opt}} was wrong.
-    </h2>
-    <br>
-    <form action="http://ccproiect2.azurewebsites.net/options">
-    <h4>
-    Play again?
-    </h4>
-    <br>
-    <input type="submit" value="Play again" />
-    </form>
-      
+       <br><br><br><br><br><br><br><br><br>
+       <center>
+            <h2>
+                Option  {{opt}} was wrong.
+            </h2>
+            <br>
+            <form action="http://ccproiect2.azurewebsites.net/options">
+
+            <br>
+            <input type="submit" value="Play again" class="button button5" />
+            </form>
+       </center>
    </body>
 </html>

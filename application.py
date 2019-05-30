@@ -64,7 +64,7 @@ def preview():
     if request.method == 'POST':
             receiver = request.form["receiver"]
             title = request.form["title"]
-            message = request.form["message"] + "This was the answer "+ answer
+            message = request.form["message"] + "\n \n You should also try this game \n http://ccproiect2.azurewebsites.net/options"
             sendMail(receiver,title,message)
     return "Mail sent"
 
