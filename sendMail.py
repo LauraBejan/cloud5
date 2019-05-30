@@ -3,10 +3,10 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
 def sendMail(to,title,message):
-	f = open("mail_key.txt", "r")
-	key=f.read()
+	#f = open("mail_key.txt", "r")
+	key="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"
 
-	message = Mail(from_email = "lepowobo@directmail.top",
+	message = Mail(from_email = "laura@planet-travel.club",
 			to_emails=to,
 			subject=title,
 			plain_text_content='easy to use',

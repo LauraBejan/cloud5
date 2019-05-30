@@ -12,4 +12,7 @@ WTForms == 2.2.1
 simplejson == 3.16.0
 SendGrid == 6.0.5
 requests == 2.22.0
-
+pytube == 9.5.0
+debtools == 0.7.4
+pocketsphinx == 0.1.15
+azure-cognitiveservices-vision-computervision == 0.3.0

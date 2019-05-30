@@ -6,8 +6,12 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 import json
 from sendMail import sendMail
 from yt import *
-
+from thumbnail import *
 from flask import Flask
+#from azure import *
+#from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+#from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
+#from msrest.authentication import CognitiveServicesCredentials
 
 global answer
 def setAnswer(this):
@@ -17,6 +21,7 @@ def setAnswer(this):
 app = Flask(__name__)
 class ReusableForm(Form):
     name = TextField('Name:', validators=[validators.required()])
+
 @app.route("/")
 def hello():
     # return "hello"
@@ -45,13 +50,28 @@ def result():
     #   return render_template("result.html",result = result)
     return str(getRandomAnswer('kim kardashian'))
 
-
+@app.route("/down")
+def down():
+    return render_template("down.html")
+    
 @app.route("/mail")
 def mail():
     return render_template("mail.html")
+    
+
+@app.route("/preview",methods=['POST','GET'])
+def preview():
+    if request.method == 'POST':
+            receiver = request.form["receiver"]
+            title = request.form["title"]
+            message = request.form["message"] + "This was the answer "+ answer
+            sendMail(receiver,title,message)
+    return "Mail sent"
+
+
+
 
 import random
-from thumbnail import *
 @app.route("/options")
 def displayOptions():
     rand_seed = random.randint(1,1000) / 1000
@@ -72,18 +92,37 @@ def processResult():
             option = request.form["option"]
             global answer
             if option == answer:
-                return "Nice, option {} was correct".format(option[-1])
-            return "Wrong, option {} was incorrect".format(option[-1])
+                return render_template("correct.html",opt=option[-1])
+               # return "Nice, option {} was correct".format(option[-1])
+            return render_template("fail.html",opt=option[-1])
 
 
-@app.route("/preview",methods=['POST','GET'])
-def preview():
-    if request.method == 'POST':
-            receiver = request.form["receiver"]
-            title = request.form["title"]
-            message = request.form["message"]
-            sendMail(receiver,title,message)
-    return "Mail sent"
+@app.route("/img", methods=['POST'])
+def analyzeImg():
+    ACCOUNT_ENDPOINT='https://westus.api.cognitive.microsoft.com/'
+    ACCOUNT_KEY='48fdf3934f4648779d8fca132cb7c21e'
+    endpoint = 'https://westus.api.cognitive.microsoft.com/'
+    key = '48fdf3934f4648779d8fca132cb7c21e'
+
+    # Set credentials
+    credentials = CognitiveServicesCredentials(key)
+
+    # Create client
+    client = ComputerVisionClient(endpoint, credentials)
+
+    domain = "landmarks"
+    # https://westus.api.cognitive.microsoft.com/
+    url = "http://www.public-domain-photos.com/free-stock-photos-4/travel/san-francisco/golden-gate-bridge-in-san-francisco.jpg"
+    language = "en"
+    max_descriptions = 3
+
+    analysis = client.describe_image(url, max_descriptions, language)
+
+    for caption in analysis.captions:
+        return str(caption.text)
+
+    
+
 
 @app.route("/suggestion")
 def suggestKeyWords():
